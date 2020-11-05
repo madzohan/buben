@@ -1,9 +1,9 @@
 <h1>API reference draft</h1>
 <h3>List Product Reviews</h3>
 <ul>
-    <li>Returns Product identified by id and its Reviews, maximum of 5 records per page (сursor pagination)
-    <p>>ToDo: implement cache based on this answer https://stackoverflow.com/a/42426019/3033586</p>
-    <pre><code>GET /api/v1/products/{product_id}</code></pre>
+    <li>Returns Product identified by id and its Reviews, maximum of 5 records per page (by default)
+    <pre><code>GET /api/v1/products/{product_id}
+GET /api/v1/products/1?reviews_per_page=2&page=1</code></pre>
     </li>
     <li>Example requests and responses
     <ul>

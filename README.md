@@ -7,7 +7,8 @@
 docker-compose version 1.27.4, build 40524192</pre></li>
 <li>Create <code>.env</code> file in root project directory within populated ...
 <ol><li>api settings:
-    <pre><code>FLASK_ENV=development
+    <pre><code>FLASK_APP=main.py
+FLASK_ENV=development
 FLASK_DEBUG=true
 SQLALCHEMY_ECHO=true
 POSTGRES_USER=postgres
