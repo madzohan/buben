@@ -1,6 +1,6 @@
-# Buben
-## python dev test task
-### local deployment using Docker & docker-compose:
+<h1>Buben</h1>
+<h2>python dev test task</h2>
+<h3>local deployment using Docker & docker-compose:</h3>
 
 <ol><li><strong>Required (tested) software versions:</strong>
 <pre>Docker version 19.03.13, build 4484c46d9d

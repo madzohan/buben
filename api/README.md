@@ -1,5 +1,5 @@
-# API reference draft
-###List Product Reviews
+<h1>API reference draft</h1>
+<h3>List Product Reviews</h3>
 <ul>
     <li>Returns Product identified by id and its Reviews, maximum of 5 records per page (сursor pagination)
     <p>>ToDo: implement cache based on this answer https://stackoverflow.com/a/42426019/3033586</p>
@@ -35,7 +35,7 @@ Location: /api/v1/products/{{product_id}}
 </li></ul></li></ul>
 <hr />
 
-###Create Product Reviews
+<h3>Create Product Reviews</h3>
 <ul>
     <li>Creates a review for product identified by id
     <pre><code>PUT /api/v1/products/{product_id}/reviews/create.json</code></pre></li>
@@ -69,7 +69,7 @@ Location: /api/v1/products/{{product_id}}/reviews/{{new-review-id}}.json
 </li></ul></li></ul>
 <hr />
 
-### dev notes
+<h3>dev notes</h3>
 <ul><li>working with migrations<pre><code>export $(cat ../.env | xargs) && flask db migrate -m "Initial: product, review"
 flask db upgrade</code></pre></li>
 <li>local Pipenv for generating Pipfile.lock
