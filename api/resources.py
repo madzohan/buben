@@ -10,10 +10,9 @@ class Product(Resource):
     @use_kwargs({"reviews_per_page": fields.Int(missing=5),
                  "page": fields.Int(missing=1)}, location="query")
     def get(self, product_id: int, page: int, reviews_per_page: int):
-        product = models.Product.query.get(product_id)
         reviews = models.Review.query.filter_by(product_id=product_id).order_by(
             models.Review.id.asc()).paginate(page, reviews_per_page).items
-        product_dump = schemas.Product().dump(product)
+        product_dump = schemas.Product().dump(reviews[0].product)
         product_dump["reviews"] = schemas.Review(many=True).dump(reviews)
         return jsonify({"products": [product_dump]})
 
