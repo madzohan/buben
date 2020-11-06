@@ -2,18 +2,18 @@
 <h3>List Product Reviews</h3>
 <ul>
     <li>Returns Product identified by id and its Reviews, maximum of 5 records per page (by default)
-    <pre><code>GET /api/v1/products/{product_id}
-GET /api/v1/products/1?reviews_per_page=2&page=1</code></pre>
+    <pre><code>GET /api/v1/products/{product_id}.json
+GET /api/v1/products/1.json?reviews_per_page=2&page=1</code></pre>
     </li>
     <li>Example requests and responses
     <ul>
         <li>using <b>curl</b>
-            <pre><code>curl http://{domain}/api/v1/products/{product_id} -v</code></pre>
+            <pre><code>curl http://{domain}/api/v1/products/{product_id}.json -v</code></pre>
         </li>
         <li>response
 
 <pre>Status: 200
-Location: /api/v1/products/{{product_id}}
+Location: /api/v1/products/{{product_id}}.json
 
 
 {

@@ -1,9 +1,12 @@
-from flask import jsonify
+from flask import jsonify, Blueprint, make_response, url_for
 from flask_restful import Resource, Api
 from webargs import fields
-from webargs.flaskparser import use_args, use_kwargs
+from webargs.flaskparser import use_args, use_kwargs, parser, abort
 
 from api import models, schemas
+
+
+api_bp = Blueprint('api', __name__)
 
 
 class Product(Resource):
@@ -19,15 +22,35 @@ class Product(Resource):
 
 class Review(Resource):
     def get(self, product_id: int, review_id: int):
-        return
+        review = models.Review.query.get(review_id)
+        product_dump = schemas.Product().dump(review.product)
+        product_dump["reviews"] = schemas.Review(many=True).dump([review])
+        return jsonify({"products": [product_dump]})
 
     @use_args(schemas.Review())
-    def put(self, product_id: int):
-        return
+    def put(self, kwargs: dict, product_id):
+        new_review = models.Review(**kwargs)
+        models.db.session.add(new_review)
+        models.db.session.commit()
+        product_dump = schemas.Product().dump(new_review.product)
+        product_dump["reviews"] = schemas.Review(many=True).dump([new_review])
+        resp = make_response(product_dump, 201)
+        resp.headers["Location"] = url_for("api.review", product_id=product_id, review_id=new_review.id)
+        return resp
 
 
-api = Api(prefix='/api/v1')
-api.add_resource(Product, "/products/<int:product_id>")
+api = Api(api_bp, prefix='/api/v1')
+api.add_resource(Product, "/products/<int:product_id>.json", endpoint="product")
 api.add_resource(Review,
-                 "/products/<int:product_id>/reviews/<int:review_id>",
-                 "/products/<int:product_id>/reviews/create.json")
+                 "/products/<int:product_id>/reviews/<int:review_id>.json",
+                 "/products/<int:product_id>/reviews/create.json",
+                 endpoint="review")
+
+
+# This error handler is necessary for usage with Flask-RESTful
+@parser.error_handler
+def handle_request_parsing_error(err, req, schema, *, error_status_code, error_headers):
+    """webargs error handler that uses Flask-RESTful's abort function to return
+    a JSON error response to the client.
+    """
+    abort(error_status_code, errors=err.messages)
