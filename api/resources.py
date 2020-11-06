@@ -1,4 +1,5 @@
-from flask import jsonify, Blueprint, make_response, url_for
+from flask import jsonify, Blueprint, make_response, url_for, request
+from flask_caching import Cache
 from flask_restful import Resource, Api
 from webargs import fields
 from webargs.flaskparser import use_args, use_kwargs, parser, abort
@@ -8,13 +9,18 @@ from api import models, schemas
 
 api_bp = Blueprint('api', __name__)
 
+cache = Cache(config={'CACHE_TYPE': 'simple'})
+
 
 class Product(Resource):
     @use_kwargs({"reviews_per_page": fields.Int(missing=5),
                  "page": fields.Int(missing=1)}, location="query")
     def get(self, product_id: int, page: int, reviews_per_page: int):
-        reviews = models.Review.query.filter_by(product_id=product_id).order_by(
-            models.Review.id.asc()).paginate(page, reviews_per_page).items
+        reviews = cached = cache.get(request.url)
+        if cached is None:
+            reviews = models.Review.query.filter_by(product_id=product_id).order_by(
+                models.Review.id.asc()).paginate(page, reviews_per_page).items
+            cache.set(request.url, reviews)
         product_dump = schemas.Product().dump(reviews[0].product)
         product_dump["reviews"] = schemas.Review(many=True).dump(reviews)
         return jsonify({"products": [product_dump]})
@@ -22,7 +28,10 @@ class Product(Resource):
 
 class Review(Resource):
     def get(self, product_id: int, review_id: int):
-        review = models.Review.query.get(review_id)
+        review = cached = cache.get(request.url)
+        if cached is None:
+            review = models.Review.query.get(review_id)
+            cache.set(request.url, review)
         product_dump = schemas.Product().dump(review.product)
         product_dump["reviews"] = schemas.Review(many=True).dump([review])
         return jsonify({"products": [product_dump]})

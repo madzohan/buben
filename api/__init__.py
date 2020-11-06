@@ -1,8 +1,11 @@
 from flask import Flask
 
+from api.resources import cache
+
 
 def create_app(app_config):
     app = Flask(__name__)
+    cache.init_app(app)
 
     # Configurations
     app.config.from_object(app_config)

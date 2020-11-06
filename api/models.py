@@ -26,4 +26,4 @@ class Review(db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey("product.id", ondelete="CASCADE"), nullable=False)
 
     def __repr__(self):
-        return "<Review title={}>".format(self.title)
+        return "<Review id={} title={}>".format(self.id, self.title)
