@@ -70,7 +70,10 @@ Location: /api/v1/products/{{product_id}}/reviews/{{new-review-id}}.json
 <hr />
 
 <h3>dev notes</h3>
-<ul><li>working with migrations<pre><code>export $(cat ../.env | xargs) && flask db migrate -m "Initial: product, review"
+<ul><li>working with migrations<pre><code>export $(cat ../.env | xargs)
+# make sure you've overridden host address from docker's "db" value
+export POSTGRES_HOST=0.0.0.0
+flask db migrate -m "Initial: product, review"
 flask db upgrade</code></pre></li>
 <li>local Pipenv for generating Pipfile.lock
 <pre><code>export PIPENV_PIPFILE=/abs_path_to/Pipfile

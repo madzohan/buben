@@ -21,9 +21,10 @@ class Product(db.Model):
 
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    asin = db.Column(db.VARCHAR(length=10), nullable=False)
     title = db.Column(db.VARCHAR, nullable=False)
     body = db.Column(db.TEXT, nullable=False)
-    product_id = db.Column(db.Integer, db.ForeignKey("product.id", ondelete="CASCADE"), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey("product.id", ondelete="CASCADE"))
 
     def __repr__(self):
         return "<Review id={} title={}>".format(self.id, self.title)
