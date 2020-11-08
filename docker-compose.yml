@@ -5,7 +5,7 @@ services:
   db:
     image: library/postgres:13.0-alpine
     container_name: db
-    restart: always
+    restart: "always"
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -22,3 +22,10 @@ services:
       - "0.0.0.0:5000:5000"
     env_file:
       - .env
+
+  crawlers:
+    build: ./api
+    restart: "no"
+    env_file:
+      - .env
+    entrypoint: /bin/bash -c "flask parse"

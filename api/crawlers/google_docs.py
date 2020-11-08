@@ -5,6 +5,7 @@ import os
 import marshmallow
 import psycopg2.errors
 import requests
+import sqlalchemy
 from flask import Blueprint
 
 from api import schemas
@@ -56,7 +57,7 @@ def parse(db):
         # if there is duplicate - skip whole cmd call
         try:
             db.session.commit()
-        except psycopg2.errors.UniqueViolation as e:
+        except (psycopg2.errors.UniqueViolation, sqlalchemy.exc.IntegrityError) as e:
             logger.error("Skipped duplicate data=%s", str(e))
             return
         asin_to_data_list.append(asin_to_data)

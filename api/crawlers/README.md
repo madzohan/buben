@@ -9,6 +9,7 @@
  </ol>
 your env vars should be: 
 <pre><code>REVIEW_DOC_ID=1iSR0bR0TO5C3CfNv-k1bxrKLD5SuYt_2HXhI2yq15Kg
-PRODUCT_DOC_ID=1roypo_8amDEIYc-RFCQrb3WyubMErd3bxNCJroX-HVE</code></pre></li>
+PRODUCT_DOC_ID=1roypo_8amDEIYc-RFCQrb3WyubMErd3bxNCJroX-HVE
+... other postgres and flask envs ...</code></pre></li>
 <li><pre><code>cd api && export $(cat ../.env | xargs)
 flask parse</code></pre></li></ul>
