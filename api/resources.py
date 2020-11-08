@@ -37,7 +37,7 @@ class Review(Resource):
         return jsonify({"products": [product_dump]})
 
     @use_args(schemas.Review())
-    def put(self, kwargs: dict, product_id):
+    def put(self, kwargs: dict, product_id: int):
         new_review = models.Review(**kwargs)
         models.db.session.add(new_review)
         models.db.session.commit()

@@ -17,6 +17,9 @@ POSTGRES_USER=postgres
 POSTGRES_PASSWORD=1111
 POSTGRES_DB=postgres
 </code></pre></li>
+<li>crawlers settings:
+    <pre><code>REVIEW_DOC_ID=1iSR0bR0TO5C3CfNv-k1bxrKLD5SuYt_2HXhI2yq15Kg
+PRODUCT_DOC_ID=1roypo_8amDEIYc-RFCQrb3WyubMErd3bxNCJroX-HVE</code></pre></li>
 </ol></li>
 <li><strong>Run:</strong>
 <pre>docker-compose --env-file .env up</pre></li>

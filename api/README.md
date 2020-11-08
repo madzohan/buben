@@ -70,7 +70,8 @@ Location: /api/v1/products/{{product_id}}/reviews/{{new-review-id}}.json
 <hr />
 
 <h3>dev notes</h3>
-<ul><li>working with migrations<pre><code>export $(cat ../.env | xargs)
+<ul><li>working with migrations<pre><code>cd api
+export $(cat ../.env | xargs)
 # make sure you've overridden host address from docker's "db" value
 export POSTGRES_HOST=0.0.0.0
 flask db migrate -m "Initial: product, review"
