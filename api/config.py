@@ -3,13 +3,11 @@ import os
 # Statements for switching dev/prod environments
 SQLALCHEMY_ECHO = os.getenv("SQLALCHEMY_ECHO", "").lower() == "true"  # False
 DEBUG = os.getenv("FLASK_DEBUG", "").lower() == "true"  # False
+TESTING = os.getenv("FLASK_TESTING", "").lower() == "true"  # False
 ENV = os.getenv("FLASK_ENV", "production")
 
 # Disable Signalling Support http://flask-sqlalchemy.pocoo.org/dev/signals/
 SQLALCHEMY_TRACK_MODIFICATIONS = False
-
-# Define the application directory
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 # Define the database - we are working with
 POSTGRES_DB = os.environ.get("POSTGRES_DB")

@@ -5,6 +5,6 @@ dist/
 build/
 *.egg-info/
 .env
+.env_test
 data/
 config_local.py
-.env
