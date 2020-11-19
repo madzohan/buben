@@ -11,7 +11,7 @@ docker-compose version 1.27.4, build 40524192</pre></li>
 FLASK_APP=main.py
 FLASK_ENV=development
 FLASK_DEBUG=true
-SQLALCHEMY_ECHO=true
+SQLALCHEMY_ECHO=false
 POSTGRES_HOST=db
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=1111

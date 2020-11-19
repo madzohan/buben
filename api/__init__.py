@@ -1,4 +1,5 @@
 import logging
+import logging.config
 
 from flask import Flask
 
@@ -11,7 +12,11 @@ def create_app(app_config):
 
     # Configurations
     app.config.from_object(app_config)
-    logging.basicConfig(level=logging.DEBUG if app.env == "development" else logging.INFO)
+    logging_config = app.config.get("LOGGING")
+    if logging_config:
+        logging.config.dictConfig(logging_config)
+    logger = logging.getLogger(__name__)
+    logger.info(dict(action="create_app"))
 
     from api.models import db, ma, migrate
     db.init_app(app)
