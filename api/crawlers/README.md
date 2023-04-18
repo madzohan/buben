@@ -2,7 +2,7 @@
 
 <h2>Usage</h2>
 <ul>
-<li>You have export docs ids to your environment variables, for example your docs links are
+<li>You have export docs ids to your environment variables, for example your docs links are (UPD links are broken now :) )
  <ol>
     <li>Reviews: <a href="https://docs.google.com/spreadsheets/d/1iSR0bR0TO5C3CfNv-k1bxrKLD5SuYt_2HXhI2yq15Kg/edit#gid=0">https://docs.google.com/spreadsheets/d/1iSR0bR0TO5C3CfNv-k1bxrKLD5SuYt_2HXhI2yq15Kg/edit#gid=0</a></li>
     <li>Products: <a href="https://docs.google.com/spreadsheets/d/1roypo_8amDEIYc-RFCQrb3WyubMErd3bxNCJroX-HVE/edit#gid=0">https://docs.google.com/spreadsheets/d/1roypo_8amDEIYc-RFCQrb3WyubMErd3bxNCJroX-HVE/edit#gid=0</a></li>
